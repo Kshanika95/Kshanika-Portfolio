@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Kshanika Patel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'DM Serif Display',serif;--font-body:'DM Sans',sans-serif;
+  --r-sm:6px;--r-md:12px;--r-lg:20px;--r-xl:28px;--r-pill:999px;
+  --ease:cubic-bezier(0.4,0,0.2,1);--t:0.3s var(--ease);
+  /* Plum & Gold */
+  --bg:#FAF8F3;--bg-alt:#F0EBE3;--bg-card:#FFFFFF;--bg-dark:#21152C;
+  --ac:#7B3FA0;--ac-warm:#D4860A;--ac-soft:#F0DEFF;
+  --tx:#180F20;--tx2:#5A4868;--tx3:#9A87AA;--tx-d:#F5EEFF;
+  --bd:#DDD0EA;--tag-bg:#EDD6FF;--tag-tx:#560E9A;
+  --nav:rgba(250,248,243,0.92);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--tx);line-height:1.7;font-size:16px;overflow-x:hidden;transition:background var(--t),color var(--t)}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+section{scroll-margin-top:64px}
+
+/* ── NAV (shared) ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;height:64px;transition:background var(--t),box-shadow var(--t);
+}
+nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,0.07)}
+.nav-logo{
+  font-family:var(--font-display);font-size:19px;color:var(--tx);
+  letter-spacing:-0.02em;cursor:pointer;position:relative;transition:color var(--t);
+}
+.nav-logo::after{
+  content:'';position:absolute;left:0;bottom:-2px;
+  width:0;height:1.5px;background:var(--ac);transition:width 0.35s var(--ease);
+}
+.nav-logo:hover::after{width:100%}
+.nav-logo:hover{color:var(--ac)}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nav-link{
+  font-size:14px;font-weight:500;color:var(--tx2);
+  padding:7px 16px;border-radius:var(--r-pill);
+  transition:color var(--t),background var(--t);
+}
+.nav-link:hover{color:var(--ac);background:var(--ac-soft)}
+.nav-link.active{color:var(--ac)}
+.nav-icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--tx2);border:1.5px solid var(--bd);
+  transition:color var(--t),border-color var(--t),background var(--t);
+}
+.nav-icon-btn:hover{color:var(--ac);border-color:var(--ac);background:var(--ac-soft)}
+.nav-icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-resume{
+  font-size:13px;font-weight:600;color:var(--ac);
+  border:1.5px solid var(--ac);padding:7px 18px;border-radius:var(--r-pill);
+  transition:background var(--t),color var(--t);
+  display:inline-flex;align-items:center;gap:7px;
+}
+.nav-resume:hover{background:var(--ac);color:#fff}
+.nav-resume svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0}
+.nav-divider{width:1px;height:20px;background:var(--bd);margin:0 4px}
+
+/* ── SHARED SECTION SHELL ── */
+.shell{padding:96px 6%}
+.shell.alt{background:var(--bg-alt)}
+.shell.dark{background:var(--bg-dark);color:var(--tx-d)}
+.s-tag{
+  font-size:11px;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ac-warm);
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+}
+.s-tag::before{content:'';width:20px;height:1px;background:var(--ac-warm)}
+.s-tag.lt{color:rgba(255,255,255,0.5)}
+.s-tag.lt::before{background:rgba(255,255,255,0.35)}
+.s-title{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.8vw,2.9rem);
+  letter-spacing:-0.025em;line-height:1.1;color:var(--tx);margin-bottom:12px;
+}
+.s-title.d{color:var(--tx-d)}
+.s-title em{font-style:italic;color:var(--ac)}
+.s-title.d em{color:var(--ac-soft)}
+.s-desc{font-size:16px;color:var(--tx2);max-width:500px;line-height:1.65}
+.s-desc.d{color:rgba(255,255,255,0.55)}
+
+/* ── ABOUT HERO BANNER ── */
+.about-banner{
+  min-height:52vh;display:flex;align-items:flex-end;
+  padding:120px 6% 64px;position:relative;overflow:hidden;
+  background:var(--bg-dark);
+}
+.about-banner-orb{
+  position:absolute;top:-80px;right:-60px;width:480px;height:480px;
+  background:radial-gradient(circle at 38%,var(--ac) 0%,transparent 65%);
+  opacity:0.18;border-radius:50%;z-index:0;
+  animation:orbFloat 8s ease-in-out infinite;
+}
+@keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.about-banner-orb2{
+  position:absolute;bottom:-60px;left:0;width:340px;height:340px;
+  background:radial-gradient(circle,var(--ac-soft) 0%,transparent 70%);
+  opacity:0.08;border-radius:50%;z-index:0;
+}
+.about-banner-content{position:relative;z-index:1;max-width:680px}
+.about-banner-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);margin-bottom:20px;
+}
+.about-banner-eyebrow span{width:20px;height:1px;background:rgba(255,255,255,0.3);display:inline-block}
+.about-banner h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,6vw,5rem);
+  line-height:1.04;letter-spacing:-0.032em;
+  color:#fff;margin-bottom:20px;
+}
+.about-banner h1 em{font-style:italic;color:var(--ac-soft)}
+.about-banner p{
+  font-size:18px;color:rgba(255,255,255,0.62);
+  max-width:460px;line-height:1.65;
+}
+
+/* ── ABOUT BODY ── */
+.about-grid{
+  display:grid;grid-template-columns:5fr 7fr;
+  gap:72px;align-items:start;
+}
+.about-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.photo-cell{
+  border-radius:var(--r-lg);overflow:hidden;
+  background:var(--bg-alt);border:1px solid var(--bd);
+  aspect-ratio:3/4;position:relative;
+  transition:transform 0.45s var(--ease),box-shadow 0.45s var(--ease);
+  cursor:default;
+}
+.photo-cell:hover{transform:scale(1.04) rotate(-0.8deg);box-shadow:0 14px 36px rgba(0,0,0,0.11)}
+.photo-cell:nth-child(2){margin-top:28px}
+.photo-cell:nth-child(3){grid-column:span 2;aspect-ratio:16/9;margin-top:4px}
+.photo-cell:nth-child(3):hover{transform:scale(1.02) rotate(0deg)}
+.photo-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  opacity:0.22;padding:16px;text-align:center;
+}
+.photo-placeholder svg{width:36px;height:36px}
+.photo-placeholder p{font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;line-height:1.4}
+.photo-cell img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.6s var(--ease);
+}
+.photo-cell:hover img{transform:scale(1.06)}
+.photo-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,0.42));
+  color:#fff;font-size:10.5px;font-weight:600;
+  padding:20px 14px 10px;letter-spacing:0.05em;text-transform:uppercase;
+}
+.about-copy h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,3.2vw,2.6rem);
+  letter-spacing:-0.025em;line-height:1.1;color:var(--tx);margin-bottom:20px;
+}
+.about-copy h2 em{font-style:italic;color:var(--ac)}
+.about-copy p{font-size:15.5px;color:var(--tx2);line-height:1.73;margin-bottom:14px}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+.sk{
+  background:var(--bg-card);border:1px solid var(--bd);color:var(--tx2);
+  font-size:12px;font-weight:500;padding:5px 14px;border-radius:var(--r-pill);
+  transition:border-color var(--t),color var(--t),background var(--t);
+}
+.sk:hover{border-color:var(--ac);color:var(--ac);background:var(--ac-soft)}
+
+/* ── CLIENTS ── */
+.clients-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+  gap:2px;border:1px solid var(--bd);border-radius:var(--r-xl);
+  overflow:hidden;background:var(--bd);
+}
+.client-cell{
+  background:var(--bg-card);padding:30px 18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;text-align:center;min-height:110px;
+  transition:background 0.35s var(--ease),transform 0.35s var(--ease);
+}
+.client-cell:hover{background:var(--ac-soft);transform:scale(1.03)}
+.client-wordmark{
+  font-family:var(--font-display);font-size:18px;
+  letter-spacing:-0.01em;color:#6B6B6B;
+  filter:grayscale(100%);
+  transition:color var(--t);
+}
+.client-cell:hover .client-wordmark{color:var(--ac)}
+.client-sector{font-size:10px;color:var(--tx3);margin-top:1px;letter-spacing:0.03em}
+
+/* ── TESTIMONIALS CAROUSEL ── */
+.testi-wrap{position:relative;max-width:760px;margin:0 auto}
+.testi-track-outer{overflow:hidden;border-radius:var(--r-xl)}
+.testi-track{
+  display:flex;transition:transform 0.5s var(--ease);
+}
+.tc{
+  background:var(--bg-card);border:1px solid var(--bd);
+  border-radius:var(--r-xl);padding:40px;
+  flex:0 0 100%;box-sizing:border-box;
+  min-height:280px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.tc-qm{
+  font-family:var(--font-display);font-style:italic;
+  font-size:3.8rem;line-height:0.7;color:var(--ac-soft);
+  margin-bottom:14px;display:block;
+}
+.tc-text{font-size:16px;color:var(--tx2);line-height:1.78;margin-bottom:24px;font-style:italic}
+.tc-person{display:flex;align-items:center;gap:14px}
+.tc-av{
+  width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:600;font-size:15px;color:#fff;flex-shrink:0;
+}
+.tc-name{font-weight:600;font-size:14.5px;color:var(--tx);line-height:1.3}
+.tc-role{font-size:12.5px;color:var(--tx3)}
+.tc-link{color:var(--ac);transition:opacity var(--t)}
+.tc-link:hover{opacity:0.7}
+
+.testi-nav{
+  display:flex;align-items:center;justify-content:center;gap:20px;
+  margin-top:28px;
+}
+.testi-arrow{
+  width:46px;height:46px;border-radius:50%;
+  border:1.5px solid var(--bd);background:var(--bg-card);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--tx2);font-size:18px;
+  transition:border-color var(--t),color var(--t),background var(--t),transform var(--t);
+}
+.testi-arrow:hover{border-color:var(--ac);color:var(--ac);background:var(--ac-soft);transform:scale(1.06)}
+.testi-dots{display:flex;gap:8px}
+.testi-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--bd);
+  cursor:pointer;transition:background var(--t),transform var(--t);
+  border:none;padding:0;
+}
+.testi-dot.on{background:var(--ac);transform:scale(1.2)}
+
+/* ── CONTACT ── */
+.contact-centered{max-width:600px;margin:0 auto;text-align:center}
+.contact-centered .s-tag{justify-content:center}
+.contact-centered .s-tag::before{display:none}
+.contact-centered h2{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,5vw,3.6rem);
+  letter-spacing:-0.03em;line-height:1.07;
+  color:var(--tx-d);margin-bottom:14px;
+}
+.contact-centered h2 em{font-style:italic;color:var(--ac-soft)}
+.contact-centered p{font-size:18px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:40px}
+.contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-email{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ac);color:#fff;
+  padding:16px 32px;border-radius:var(--r-pill);
+  font-size:16px;font-weight:600;letter-spacing:0.01em;
+  transition:opacity var(--t),transform var(--t);
+}
+.cta-email:hover{opacity:0.87;transform:translateY(-2px)}
+.cta-li{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:#fff;
+  border:1.5px solid rgba(255,255,255,0.3);
+  padding:16px 28px;border-radius:var(--r-pill);
+  font-size:16px;font-weight:500;
+  transition:border-color var(--t),background var(--t),transform var(--t);
+}
+.cta-li:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.07);transform:translateY(-2px)}
+.cta-email svg,.cta-li svg{width:20px;height:20px;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--bg-dark);color:var(--tx-d);
+  padding:32px 6%;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:12px;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.foot-logo{font-family:var(--font-display);font-size:17px;cursor:pointer;opacity:0.9;transition:opacity var(--t)}
+.foot-logo:hover{opacity:1}
+.foot-back{font-size:13px;color:rgba(255,255,255,0.5);transition:color var(--t)}
+.foot-back:hover{color:#fff}
+.foot-copy{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.03em}
+
+/* ── SCROLL TOP ── */
+.scroll-top{
+  position:fixed;bottom:88px;right:24px;z-index:300;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--ac);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);font-size:17px;
+  opacity:0;transform:translateY(12px);pointer-events:none;
+  transition:opacity 0.3s var(--ease),transform 0.3s var(--ease);
+}
+.scroll-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+.scroll-top:hover{transform:translateY(-2px)}
+
+/* ── PALETTE ── */
+.palette-bar{
+  position:fixed;bottom:28px;right:24px;z-index:300;
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+}
+.palette-lbl{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3)}
+.swatches{
+  display:flex;gap:6px;background:var(--bg-card);border:1px solid var(--bd);
+  border-radius:var(--r-pill);padding:6px 10px;box-shadow:0 4px 14px rgba(0,0,0,0.09);
+}
+.sw{
+  width:22px;height:22px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;transition:transform 0.2s,border-color 0.2s;position:relative;
+}
+.sw:hover{transform:scale(1.25)}
+.sw.on{border-color:var(--tx)}
+.sw-a{background:conic-gradient(#7B3FA0 50%,#D4860A 50%)}
+.sw-b{background:conic-gradient(#B84E22 50%,#6E9558 50%)}
+.sw-c{background:conic-gradient(#1840A0 50%,#E04F38 50%)}
+.sw-tip{
+  position:absolute;bottom:130%;right:0;background:var(--bg-dark);color:var(--tx-d);
+  font-size:10px;padding:3px 8px;border-radius:4px;
+  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.15s;
+}
+.sw:hover .sw-tip{opacity:1}
+
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .about-photos{grid-template-columns:1fr 1fr}
+  .photo-cell:nth-child(3){grid-column:span 2}
+  .nav-divider{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">Kshanika Patel</a>
+  <div class="nav-right">
+    <a class="nav-link" href="index.html">Work</a>
+    <a class="nav-link active" href="about.html">About</a>
+    <div class="nav-divider"></div>
+    <a class="nav-icon-btn" href="mailto:kshanika95@gmail.com" title="Email me">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+    </a>
+    <a class="nav-resume" href="resume.pdf" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Resume
+    </a>
+  </div>
+</nav>
+
+<!-- ABOUT BANNER -->
+<div class="about-banner">
+  <div class="about-banner-orb"></div>
+  <div class="about-banner-orb2"></div>
+  <div class="about-banner-content">
+    <div class="about-banner-eyebrow"><span></span>About me</div>
+    <h1>Curious by training,<br><em>creative by nature.</em></h1>
+    <p>Senior UX Researcher growing into design. 6+ years of asking the right questions — and increasingly, answering them visually.</p>
+  </div>
+</div>
+
+<!-- ABOUT BODY -->
+<section id="about" class="shell">
+  <div class="about-grid">
+    <div class="about-photos">
+      <!-- Photo 1: Portrait -->
+      <div class="photo-cell">
+        <img src="images/portrait.jpg" alt="Kshanika Patel">
+        <div class="photo-label">In flight, off the clock</div>
+      </div>
+      <!-- Photo 2: Research in the field -->
+      <div class="photo-cell">
+        <img src="images/research.jpg" alt="Kshanika synthesizing research findings on a sticky-note wall">
+        <div class="photo-label">Synthesis in progress</div>
+      </div>
+      <!-- Photo 3: Paintings -->
+      <div class="photo-cell">
+        <img src="images/paintings.jpg" alt="Original paintings and sketches by Kshanika Patel">
+        <div class="photo-label">Some of my paintings</div>
+      </div>
+    </div>
+
+    <div class="about-copy">
+      <p class="s-tag">Who I am</p>
+      <h2>The researcher who <em>stayed in the room.</em></h2>
+      <p>I'm a Senior UX Researcher with 6+ years of experience helping product teams truly understand the people they build for. Somewhere along the way I got tired of handing off insights and watching the "so what?" get lost in translation — so I started designing too.</p>
+      <p>I care deeply about making research feel accessible to everyone on the team, building genuine trust with participants, and creating experiences that earn their place in someone's day.</p>
+      <p>Outside of work you'll find me painting, haunting art museums, obsessing over type pairings, and hunting the perfect coffee shop to read in. I bring that same curiosity — and stubbornly high standards — to everything I make.</p>
+      <div class="skills-wrap">
+        <span class="sk">User Interviews</span>
+        <span class="sk">Usability Testing</span>
+        <span class="sk">Survey Design</span>
+        <span class="sk">Diary Studies</span>
+        <span class="sk">Figma</span>
+        <span class="sk">Prototyping</span>
+        <span class="sk">Mixed Methods</span>
+        <span class="sk">Interaction Design</span>
+        <span class="sk">Workshop Facilitation</span>
+        <span class="sk">Design Systems</span>
+        <span class="sk">Accessibility</span>
+        <span class="sk">Journey Mapping</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients" class="shell alt">
+  <div style="margin-bottom:48px">
+    <p class="s-tag">Experience</p>
+    <h2 class="s-title">Trusted by <em>great teams</em></h2>
+    <p class="s-desc">Organizations I've had the privilege of doing meaningful work with.</p>
+  </div>
+  <div class="clients-grid">
+    <div class="client-cell"><div class="client-wordmark">Medical Mutual</div><div class="client-sector">Healthcare Insurance</div></div>
+    <div class="client-cell"><div class="client-wordmark">Roche</div><div class="client-sector">Pharmaceuticals</div></div>
+    <div class="client-cell"><div class="client-wordmark">GSK</div><div class="client-sector">Global Pharma</div></div>
+    <div class="client-cell"><div class="client-wordmark">Keurig Dr Pepper</div><div class="client-sector">Consumer Goods</div></div>
+    <div class="client-cell"><div class="client-wordmark">Huntington</div><div class="client-sector">Financial Services</div></div>
+    <div class="client-cell"><div class="client-wordmark">M&amp;T Bank</div><div class="client-sector">Financial Services</div></div>
+    <div class="client-cell"><div class="client-wordmark">USAA</div><div class="client-sector">Military Finance</div></div>
+    <div class="client-cell"><div class="client-wordmark">CFNA</div><div class="client-sector">Auto Finance</div></div>
+    <div class="client-cell"><div class="client-wordmark">TriNetX</div><div class="client-sector">Clinical Research</div></div>
+    <div class="client-cell"><div class="client-wordmark" style="font-size:14px">Ohio Dept. of Rehab &amp; Correction</div><div class="client-sector">Government</div></div>
+    <div class="client-cell"><div class="client-wordmark">ISF Group</div><div class="client-sector">Maritime</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="shell">
+  <div style="margin-bottom:48px">
+    <p class="s-tag">Testimonials</p>
+    <h2 class="s-title">What people <em>say</em></h2>
+    <p class="s-desc">Words from colleagues, collaborators, and the teams I've worked alongside.</p>
+  </div>
+  <div class="testi-wrap">
+    <div class="testi-track-outer">
+      <div class="testi-track" id="testiTrack">
+
+        <div class="tc">
+          <div>
+            <span class="tc-qm">"</span>
+            <p class="tc-text">Kshanika constantly demonstrates strong expertise in methodology development, stakeholder communication, research moderation, synthesis, and presentation of actionable insights — all executed with precision and professionalism. She is a trusted partner and invaluable asset to the team.</p>
+          </div>
+          <div class="tc-person">
+            <div class="tc-av" style="background:#7B3FA0">TJ</div>
+            <div><div class="tc-name"><a class="tc-link" href="https://www.linkedin.com/in/tyler-juilianna/" target="_blank" rel="noopener">Tyler Julianna</a></div><div class="tc-role">Sr. UX Researcher, USAA</div></div>
+          </div>
+        </div>
+
+        <div class="tc">
+          <div>
+            <span class="tc-qm">"</span>
+            <p class="tc-text">Kshanika is dedicated, focused, and creative. She combines methodological rigor with the ability to quickly pivot, turning complex qualitative data into clear direction to inform strategy and design. I highly recommend her to any team looking for a strategic, impactful researcher.</p>
+          </div>
+          <div class="tc-person">
+            <div class="tc-av" style="background:#D4860A">LP</div>
+            <div><div class="tc-name">Lauren Peeples</div><div class="tc-role">Director of Research, USAA</div></div>
+          </div>
+        </div>
+
+        <div class="tc">
+          <div>
+            <span class="tc-qm">"</span>
+            <p class="tc-text">Kshanika is a thoughtful, methodical researcher with a rigorous process that uncovers great insights. She is also a visual designer in her own right who can build designs to use in her own research. On top of that, she's easy to work with, reliable, and fun to be around!</p>
+          </div>
+          <div class="tc-person">
+            <div class="tc-av" style="background:#1840A0">BR</div>
+            <div><div class="tc-name">Betsy Reyes</div><div class="tc-role">Sr. Service Designer, G2O</div></div>
+          </div>
+        </div>
+
+        <div class="tc">
+          <div>
+            <span class="tc-qm">"</span>
+            <p class="tc-text">Kshanika was a super valuable member of our team and helped support on every level — always meeting or exceeding expectations in preparation, facilitation, and deliverables. Her "can do attitude" was invaluable and greatly appreciated by everyone who worked with her.</p>
+          </div>
+          <div class="tc-person">
+            <div class="tc-av" style="background:#B84E22">JP</div>
+            <div><div class="tc-name">Jay Peters</div><div class="tc-role">Direction, PARK</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testi-nav">
+      <button class="testi-arrow" id="testiPrev" aria-label="Previous testimonial">←</button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-arrow" id="testiNext" aria-label="Next testimonial">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="shell dark">
+  <div class="contact-centered">
+    <p class="s-tag lt" style="justify-content:center">Get in touch</p>
+    <h2>Let's make something<br><em>worth using.</em></h2>
+    <p>Hiring, collaborating, or just want to connect — reach out.</p>
+    <div class="contact-actions">
+      <a href="mailto:kshanika95@gmail.com" class="cta-email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        kshanika95@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/kshanika-patel/" target="_blank" rel="noopener" class="cta-li">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="foot-logo" href="index.html">Kshanika Patel</a>
+  <a class="foot-back" href="index.html">← Back to work</a>
+  <div class="foot-copy">© 2025 · UX Research & Design</div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+const btn=document.getElementById('scrollTopBtn');
+window.addEventListener('scroll',()=>{
+  btn.classList.toggle('visible',window.scrollY>400);
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>10);
+},{passive:true});
+
+// ── Testimonial carousel ──
+(function(){
+  const track=document.getElementById('testiTrack');
+  const slides=track.children;
+  const dotsWrap=document.getElementById('testiDots');
+  const prevBtn=document.getElementById('testiPrev');
+  const nextBtn=document.getElementById('testiNext');
+  let idx=0;
+  const total=slides.length;
+
+  for(let i=0;i<total;i++){
+    const d=document.createElement('button');
+    d.className='testi-dot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Go to testimonial '+(i+1));
+    d.addEventListener('click',()=>goTo(i));
+    dotsWrap.appendChild(d);
+  }
+  const dots=dotsWrap.children;
+
+  function update(){
+    track.style.transform='translateX(-'+(idx*100)+'%)';
+    for(let i=0;i<dots.length;i++) dots[i].classList.toggle('on',i===idx);
+  }
+  function goTo(i){ idx=(i+total)%total; update(); }
+
+  prevBtn.addEventListener('click',()=>goTo(idx-1));
+  nextBtn.addEventListener('click',()=>goTo(idx+1));
+
+  // swipe support
+  let startX=0;
+  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX});
+  track.addEventListener('touchend',e=>{
+    const diff=e.changedTouches[0].clientX-startX;
+    if(diff>50) goTo(idx-1);
+    else if(diff<-50) goTo(idx+1);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
