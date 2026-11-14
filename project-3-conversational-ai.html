@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversational Experience Research — Kshanika Patel</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── TOKENS — copied 1:1 from index.html so this page always matches ── */
+  :root {
+    --bg:        #0F1117;
+    --bg-alt:    #161B27;
+    --surface:   #1E2535;
+    --border:    rgba(255,255,255,0.08);
+    --text:      #E8E4DC;
+    --text-muted:#8A8FA8;
+    --accent:    #7BAF8E;
+    --accent-dim:rgba(123,175,142,0.15);
+    --nav-bg:    rgba(15,17,23,0.92);
+    --shadow:    0 20px 60px rgba(0,0,0,0.4);
+    --radius:    16px;
+    --transition: 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  [data-theme="light"] {
+    --bg:        #F7F5F0;
+    --bg-alt:    #EDEAE3;
+    --surface:   #E4E0D8;
+    --border:    rgba(0,0,0,0.08);
+    --text:      #1A1C22;
+    --text-muted:#6B7080;
+    --accent:    #4D8F68;
+    --accent-dim:rgba(77,143,104,0.12);
+    --nav-bg:    rgba(247,245,240,0.92);
+    --shadow:    0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    transition: background var(--transition), color var(--transition);
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV — identical markup/styling to index.html ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 56px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 500;
+    letter-spacing: -0.01em; cursor: pointer;
+    transition: color var(--transition);
+  }
+  .nav-logo:hover { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 8px; }
+  .nav-links a {
+    padding: 8px 18px; border-radius: 40px;
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--transition), background var(--transition);
+  }
+  .nav-links a:hover { color: var(--text); background: var(--accent-dim); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle {
+    width: 44px; height: 24px; border-radius: 40px;
+    background: var(--surface); border: 1px solid var(--border);
+    position: relative; cursor: pointer;
+    transition: background var(--transition); flex-shrink: 0;
+  }
+  .theme-toggle::after {
+    content: ''; position: absolute;
+    top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); transition: transform var(--transition);
+  }
+  [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+  .theme-icon { font-size: 0.75rem; position: absolute; top: 50%; transform: translateY(-50%); }
+  .theme-icon.moon { left: 6px; }
+  .theme-icon.sun  { right: 5px; opacity: 0; }
+  [data-theme="light"] .theme-icon.moon { opacity: 0; }
+  [data-theme="light"] .theme-icon.sun  { opacity: 1; }
+
+  .section-label {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+  }
+
+  /* ══════════════════════════════════════
+     COVER — text left, image right
+  ══════════════════════════════════════ */
+  #cover { padding: 152px 56px 72px; }
+  .cs-cover-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+    align-items: stretch;
+  }
+  .cs-cover-text { display: flex; flex-direction: column; justify-content: center; }
+
+  .cs-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+  .tag {
+    font-size: 0.63rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .tag.research { border: 1px solid var(--accent); color: var(--accent); }
+  .tag.design   { border: 1px solid #A89FD4; color: #A89FD4; }
+  .tag.both     { border: 1px solid #E0A87C; color: #E0A87C; }
+
+  .cs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+    font-weight: 500; line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+  .cs-title em { font-style: italic; color: var(--accent); }
+
+  .cs-dek {
+    font-size: 1rem; color: var(--text-muted);
+    line-height: 1.75; margin-bottom: 36px;
+  }
+
+  .cs-meta {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding-top: 28px; border-top: 1px solid var(--border);
+  }
+  .cs-meta-item strong {
+    display: block; font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .cs-meta-item span { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+  /* header image — right column, fixed height so portrait media crops instead of stretching the row */
+  .cs-hero-img {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface); height: 420px;
+  }
+  .cs-hero-img img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    filter: saturate(0.85) brightness(0.9);
+  }
+  .cs-hero-img video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    display: block;
+  }
+
+  /* generic "drop an image here" placeholder, reused in Result section */
+  .cs-img-slot {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius); border: 1px dashed var(--border);
+    background: var(--surface);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; color: var(--text-muted); font-size: 0.8rem;
+    aspect-ratio: 4/3;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .cs-img-slot:hover { border-color: var(--accent); color: var(--accent); }
+  .cs-img-slot .icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent-dim);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+
+  @media (max-width: 900px) {
+    .cs-cover-inner { grid-template-columns: 1fr; gap: 32px; }
+    .cs-hero-img { height: 320px; }
+    #cover { padding: 120px 24px 40px; }
+  }
+
+  .cs-page { max-width: 1180px; margin: 0 auto; padding: 0 56px 140px; }
+
+  @media (max-width: 560px) {
+    .cs-page { padding: 0 20px 100px; }
+  }
+
+  /* ── content sections ── */
+  .cs-content { max-width: 680px; padding-top: 24px; }
+
+  .cs-block {
+    padding: 48px 0; border-bottom: 1px solid var(--border);
+    scroll-margin-top: 130px;
+  }
+  .cs-block:last-child { border-bottom: none; }
+  .cs-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 500; margin-bottom: 20px;
+  }
+  .cs-block p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
+  .cs-block p:last-child { margin-bottom: 0; }
+
+  .cs-copy {
+    color: var(--text-muted); font-size: 0.95rem;
+    line-height: 1.8; margin-bottom: 16px;
+  }
+  .cs-impact-list {
+    list-style: none; margin: 0 0 16px; padding: 0;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .cs-impact-list li {
+    color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;
+    padding-left: 18px; border-left: 2px solid var(--accent);
+  }
+  .cs-impact-list li strong { color: var(--text); font-weight: 600; }
+
+  /* approach — real sequence, numbering earns its place */
+  .cs-process { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+  .cs-step {
+    display: flex; gap: 20px; padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .cs-step:last-child { padding-bottom: 0; }
+  .cs-step .cs-num {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--accent); font-size: 1.1rem; flex-shrink: 0; width: 28px;
+  }
+  .cs-step h3 { font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; }
+  .cs-step p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+
+  /* result — dedicated image gallery, sized for portrait phone screenshots */
+  .cs-gallery {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 24px;
+  }
+  .cs-shot { display: flex; flex-direction: column; gap: 10px; }
+  .cs-shot-img {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--surface); aspect-ratio: 9/16;
+  }
+  .cs-shot-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cs-shot-caption { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  @media (max-width: 700px) { .cs-gallery { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; } }
+
+  /* impact — reuses hero-stat treatment from index.html */
+  .cs-stats { display: flex; flex-wrap: wrap; gap: 0; margin-top: 28px; }
+  .cs-stat { padding-right: 36px; margin-right: 36px; border-right: 1px solid var(--border); }
+  .cs-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .cs-stat strong {
+    display: block; font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 6px;
+  }
+  .cs-stat span { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ══════════════════════════════════════
+     NEXT PROJECT
+  ══════════════════════════════════════ */
+  #next-project { background: var(--bg-alt); padding: 100px 56px; }
+  .cs-next-inner { max-width: 900px; margin: 0 auto; }
+  .cs-next-link {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    padding-bottom: 28px; border-bottom: 1px solid var(--border);
+    transition: border-color var(--transition);
+  }
+  .cs-next-link:hover { border-color: var(--accent); }
+  .cs-next-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 500; letter-spacing: -0.02em;
+    transition: color var(--transition);
+  }
+  .cs-next-link:hover .cs-next-title { color: var(--accent); }
+  .cs-next-arrow { font-size: 1.6rem; color: var(--accent); }
+
+  .cs-next-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 40px; border: 1px solid var(--border);
+    font-size: 0.85rem; font-weight: 500; color: var(--text);
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+  }
+  .back-link:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .footer-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 56px; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  .back-top {
+    position: fixed; bottom: 36px; right: 36px; z-index: 99;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--accent); border: none;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1.1rem; cursor: pointer;
+    opacity: 0; pointer-events: none; transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(123,175,142,0.4);
+  }
+  .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .back-top:hover { transform: translateY(-4px); }
+
+  @media (max-width: 900px) {
+    #next-project { padding: 64px 24px; }
+    .footer-bar { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+    .back-top { bottom: 20px; right: 20px; }
+  }
+
+  /* ── added for multi-image case studies ── */
+  .cs-hero-img.contain { background: #fff; }
+  .cs-hero-img.contain img { object-fit: contain; object-position: center; padding: 24px; filter: none; }
+  .cs-figure { margin: 24px 0 8px; }
+  .cs-figure img {
+    width: 100%; border-radius: var(--radius); border: 1px solid var(--border);
+    background: #fff; max-height: 560px; object-fit: contain;
+  }
+  .cs-figure figcaption { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-top: 10px; }
+  .cs-figure-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0 8px; }
+  .cs-figure-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; }
+  .cs-figure-grid.contain img { object-fit: contain; padding: 12px; aspect-ratio: 4/3; }
+  .cs-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .cs-card {
+    padding: 22px; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--bg-alt);
+  }
+  .cs-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+  .cs-card p, .cs-card li { font-size: 0.86rem !important; color: var(--text-muted); line-height: 1.65 !important; margin: 0 !important; }
+  .cs-card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .cs-card .kicker { font-size: 0.65rem !important; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent) !important; margin-bottom: 6px !important; }
+  .cs-theme { padding: 28px 0; border-top: 1px solid var(--border); }
+  .cs-theme:first-of-type { border-top: none; }
+  .cs-theme h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 4px; }
+  .cs-theme .sub { font-style: italic; color: var(--accent); margin-bottom: 16px; }
+  .cs-block ul.cs-bullets { padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+  .cs-quote { font-family: 'Playfair Display', serif; font-style: italic; color: var(--text) !important; }
+  @media (max-width: 700px) { .cs-cards, .cs-figure-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<!-- NAV — points back to the homepage, so this page never feels like a different site -->
+<nav>
+  <div class="nav-logo" onclick="window.location.href='index.html'">Kshanika Patel</div>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme" tabindex="0">
+      <span class="theme-icon moon">🌙</span>
+      <span class="theme-icon sun">☀️</span>
+    </div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cs-cover-inner">
+    <div class="cs-cover-text">
+      <div class="section-label">Case Study</div>
+      <div class="cs-tags"><span class="tag research">Research</span></div>
+      <h1 class="cs-title">Conversational <em>experience</em> research</h1>
+      <p class="cs-dek">How do members use and perceive USAA’s virtual assistant, IVR, and search? I led mixed-methods research to find out — shaping a conversational strategy that is secure, seamless, and trustworthy.</p>
+      <div class="cs-meta"><div class="cs-meta-item"><strong>Client</strong><span>USAA</span></div><div class="cs-meta-item"><strong>Timeline</strong><span>12 Weeks</span></div><div class="cs-meta-item"><strong>Role</strong><span>Lead UX Researcher</span></div><div class="cs-meta-item"><strong>Team</strong><span>1 Support Researcher, 2 Product Managers, 1 Digital Director</span></div></div>
+    </div>
+    <div class="cs-hero-img">
+      <img src="images/usaa/themes.jpg" alt="Research framework pyramid: Protect, Navigate, Interact">
+    </div>
+  </div>
+</section>
+<div class="cs-page">
+  <div class="cs-content">
+    <section class="cs-block" id="challenge">
+      <h2>The challenge</h2>
+      <p class="cs-copy">The team needed to understand how members use and perceive conversational channels — virtual assistant (VA), IVR, and search — in order to design secure, seamless, and trustworthy experiences.</p>
+    </section>
+    <section class="cs-block" id="result">
+      <h2>The result</h2>
+      <p class="cs-copy">I led mixed-methods research uncovering channel roles, pain points, and expectations. Members wanted quick info from search, guided support from the VA, and efficient escalation via IVR — but faced friction with authentication, lack of continuity, and unclear menus.</p>
+    </section>
+    <section class="cs-block" id="takeaways">
+      <h2>Key takeaways</h2>
+      <div class="cs-cards">
+        <div class="cs-card"><h3>Channel roles are distinct</h3><p>Members see each channel as serving a unique purpose: quick info, guided help, or efficient escalation to a person.</p></div>
+        <div class="cs-card"><h3>Abandonment happens when stuck</h3><p>“Phone jail” loops or missing answers lead to frustration and drop-off; search is more resilient but abandoned when results feel incomplete.</p></div>
+        <div class="cs-card"><h3>Keep menus and results short</h3><p>Keywords work better than full sentences, and members prefer 3–5 options max across menus and search results.</p></div>
+        <div class="cs-card"><h3>Self-serve first, escalate when needed</h3><p>Members prefer self-service but expect seamless escalation to humans when tasks are complex, urgent, or when systems fail.</p></div>
+        <div class="cs-card"><h3>Context must carry across channels</h3><p>Members want to switch between channels — chat to phone, phone to SMS — without repeating themselves or losing progress.</p></div>
+        <div class="cs-card"><h3>Balance innovation with comfort</h3><p>Successful conversational experiences blend new technologies with members’ trust, ease, and expectations.</p></div>
+      </div>
+    </section>
+    <section class="cs-block" id="themes">
+      <h2>Themes</h2>
+      <p class="cs-copy">We can improve the conversational experience by leveraging the right level of technology to protect, navigate, and interact.</p>
+      <figure class="cs-figure">
+        <img src="images/usaa/themes.jpg" alt="Pyramid framework of the three research themes" loading="lazy">
+        <figcaption>The three themes: Protect, Navigate, and Interact.</figcaption>
+      </figure>
+      <div class="cs-theme"><h3>Protect</h3><p class="sub">Keep my information safe without locking me out</p>
+      <div class="cs-cards">
+        <div class="cs-card"><h3>Secure me</h3><ul><li>Members are highly aware of hacking threats and want strong protection.</li><li>They trust companies’ security steps but don’t need detailed explanations.</li><li>They prefer alternatives to personal security questions, which feel invasive.</li><li>Less trust in AI handling sensitive data vs. humans.</li></ul></div>
+        <div class="cs-card"><h3>Make it unique to me</h3><ul><li>Security feels strongest when unique or personal (Face ID, PIN).</li><li>Passwords are seen as secure but disliked — too many, too complex.</li><li>Voice ID isn’t trusted: it feels unreliable, hackable, and unfamiliar.</li></ul></div>
+        <div class="cs-card"><h3>Remove my barriers</h3><ul><li>Frustration when asked to authenticate for public info or re-authenticate mid-session.</li><li>Preference for continuity across channels — no need to re-verify with the same rep.</li><li>Split on 2FA: older members prefer extra steps, younger members prefer fewer.</li></ul></div>
+      </div>
+      </div>
+      <div class="cs-theme"><h3>Navigate</h3><p class="sub">Help me find what I need without friction</p>
+      <div class="cs-cards">
+        <div class="cs-card"><h3>Use what exists for me</h3><ul><li>Members expect USAA to know their products, history, and prior steps.</li><li>They want access to past VA transcripts for reference.</li><li>SMS is strongly desired: familiar, low-barrier, multitask-friendly, and convenient for switching channels.</li></ul></div>
+        <div class="cs-card"><h3>Don’t leave me stuck</h3><ul><li>IVR often feels like a “black hole” — loops and wrong transfers.</li><li>Members expect clear ways to escalate when bots fail.</li><li>Backup login methods are needed if the preferred method fails.</li><li>No direct path to human support leaves members frustrated and undervalued.</li></ul></div>
+        <div class="cs-card"><h3>Navigate and guide me</h3><ul><li>Direct links to tasks and info, avoiding clunky navigation.</li><li>Menu options should funnel logically from general to specific.</li><li>By the third IVR round, members expect resolution or a human.</li><li>FAQs, suggested keywords, and autofill improve self-service.</li></ul></div>
+        <div class="cs-card"><h3>Don’t give me extra information</h3><ul><li>Too many results or options overwhelm and slow members down.</li><li>Avoid jargon and long descriptions in IVR and VA.</li><li>Members want clarity and brevity for faster decisions.</li></ul></div>
+      </div>
+      </div>
+      <div class="cs-theme"><h3>Interact</h3><p class="sub">Give me useful, human-like, and capable support</p>
+      <div class="cs-cards">
+        <div class="cs-card"><h3>Help me self-serve</h3><ul><li>Members want to resolve issues themselves when possible.</li><li>IVR and VA are seen as limited, but members are open to more self-service if it’s reliable.</li><li>Desired VA tasks: multi-step actions like forms, transactions, and personal info updates.</li><li>Desired IVR tasks: simple, quick tasks like status checks, balances, and payments.</li></ul></div>
+        <div class="cs-card"><h3>Converse with me</h3><ul><li>Some members want efficient, robotic systems; others want a human-like tone.</li><li>The best balance: polite, brief conversational elements (“hello,” “please,” “thank you”) without unnecessary fluff.</li></ul></div>
+        <div class="cs-card"><h3>Be my interpreter</h3><ul><li>Current systems only work if members use the “right” terms.</li><li>Members want flexible language recognition that maps their words to company terms.</li><li>They want to bypass menus with keywords when they already know what they need.</li></ul></div>
+      </div>
+      </div>
+    </section>
+    <section class="cs-block" id="opportunities">
+      <h2>Opportunity spaces</h2>
+      <div class="cs-cards">
+        <div class="cs-card"><h3>Reduce authorization requirements</h3><ul><li>Limit re-authorization when switching channels with the same person, or within the same channel.</li><li>Open access to general, public information — especially in search — without authentication.</li></ul></div>
+        <div class="cs-card"><h3>Maintain and access context</h3><ul><li>Let conversations continue after an app or website logout, ideally with priority re-queue.</li><li>Allow channel switches (VA to call, text, or email) that keep the conversation’s context.</li><li>Let members pause a chat and come back to it without losing context.</li><li>Give support access to recent activity and past VA transcripts.</li><li>Add the ability to start or switch to text messaging with a human.</li></ul></div>
+        <div class="cs-card"><h3>Optimize systems with AI</h3><ul><li>Use AI to complete simpler tasks faster — without giving it full access to personal data.</li><li>Improve voice and written recognition, especially for top self-serve tasks.</li></ul></div>
+        <div class="cs-card"><h3>Improve menu efficiencies</h3><ul><li>Show 5 search results; cap VA menus at 3 options and IVR at 5.</li><li>Provide a menu bypass and a hotline to a person for emergencies.</li><li>Add a back button and a direct way to reach a person when there’s no way out.</li><li>Keep FAQs, suggested topics, and autofill for search; narrowing options for IVR and VA.</li></ul></div>
+        <div class="cs-card"><h3>Continue content optimization</h3><ul><li>Remove irrelevant information like company history, keep conversations succinct, and cut jargon.</li><li>Keep bot flows short, with a polite tone and no extra wording or strong personality.</li></ul></div>
+      </div>
+    </section>
+    <section class="cs-block" id="impact">
+      <h2>The impact</h2>
+      <p class="cs-copy">The research insights shaped USAA’s conversational strategy, driving improvements in authentication, AI optimization, and channel integration — enabling more intuitive, trusted, and human-centered experiences.</p>
+    </section>
+  </div>
+</div>
+<!-- NEXT PROJECT -->
+<section id="next-project">
+  <div class="cs-next-inner">
+    <div class="section-label">Next Project</div>
+    <a class="cs-next-link" href="project-4-trinetx.html">
+      <span class="cs-next-title">Enhancing Platform Differentiation &amp; Adoption</span>
+      <span class="cs-next-arrow">→</span>
+    </a>
+    <div class="cs-next-footer">
+      <a class="back-link" href="index.html#work">← Back to all work</a>
+    </div>
+  </div>
+</section>
+<div class="footer-bar">
+  <span>© 2025 Kshanika Patel · San Francisco, CA</span>
+  <span>Senior UX Researcher &amp; Designer</span>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  // ── THEME — synced via localStorage so it stays consistent as you move between pages ──
+  (function(){
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.dataset.theme = saved;
+  })();
+  function toggleTheme() {
+    const html = document.documentElement;
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', html.dataset.theme);
+  }
+  document.querySelector('.theme-toggle').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') toggleTheme();
+  });
+
+  // ── BACK TO TOP ──
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
