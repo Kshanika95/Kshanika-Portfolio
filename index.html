@@ -72,9 +72,9 @@
     border: none; opacity: 1;
   }
   .cursor-label {
-    font-size: 0.62rem; font-weight: 600;
+    font-size: 0.55rem; text-align: center; line-height: 1.3; font-weight: 600;
     letter-spacing: 0.08em; color: #fff;
-    text-transform: uppercase; white-space: nowrap;
+    text-transform: uppercase; white-space: normal; max-width: 70px;
     opacity: 0; transition: opacity 0.2s ease;
   }
   .custom-cursor.view-mode .cursor-label { opacity: 1; }
@@ -329,6 +329,8 @@
   .tag.design   { border: 1px solid #A89FD4; color: #A89FD4; }
   .tag.both     { border: 1px solid #E0A87C; color: #E0A87C; }
 
+  .wi-soon { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+  .work-item:not(.has-case) { cursor: default; }
   .wi-desc {
     font-size: 0.88rem; color: var(--text-muted);
     line-height: 1.75; margin-bottom: 32px; flex: 1;
@@ -357,6 +359,8 @@
     filter: saturate(1) brightness(0.92);
     transform: scale(1.07);
   }
+  .wi-text-panel { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(2rem,4vw,3.5rem); color:var(--text-muted); }
+  .wi-text-panel small { font-family:'Inter',sans-serif; font-style:normal; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; }
   /* bottom accent bar */
   .wi-right::after {
     content: '';
@@ -384,6 +388,8 @@
   .about-text h2 em { font-style: italic; color: var(--accent); }
   .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 20px; }
   .about-photo-wrap { position: relative; }
+  .about-more { display: inline-block; margin-top: 8px; font-size: 0.9rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+  .about-more:hover { opacity: 0.75; }
   .about-photo-placeholder {
     width: 100%; aspect-ratio: 3/4; border-radius: var(--radius);
     background: var(--surface);
@@ -397,6 +403,7 @@
     background: var(--accent-dim);
     display: flex; align-items: center; justify-content: center; font-size: 2rem;
   }
+  .about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); }
   .about-photo-accent {
     position: absolute; bottom: -20px; left: -20px;
     width: 120px; height: 120px; border-radius: var(--radius);
@@ -515,7 +522,7 @@
 <canvas id="heroCanvas"></canvas>
 
 <!-- Custom cursor dots -->
-<div class="custom-cursor" id="cursorDot"><span class="cursor-label">View</span></div>
+<div class="custom-cursor" id="cursorDot"><span class="cursor-label">View Case Study</span></div>
 <div class="custom-cursor cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
@@ -591,7 +598,7 @@
   <div class="section-label">Selected Work</div>
   <div class="work-list" id="workList">
 
-    <div class="work-item">
+    <a class="work-item has-case" href="project-1-medical-claims.html">
       <div class="wi-left">
         <div>
           <div class="wi-tags"><span class="tag research">Research</span><span class="tag design">Design</span></div>
@@ -604,13 +611,14 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80" alt="Medical Claims" loading="lazy">
+        <img class="wi-img" src="images/work-medical-claims.jpg" alt="Medical Claims" loading="lazy">
       </div>
-    </div>
+    </a>
 
     <div class="work-item">
       <div class="wi-left">
         <div>
+          <div class="wi-soon">Case study coming soon</div>
           <div class="wi-tags"><span class="tag research">Research</span><span class="tag design">Design</span></div>
           <div class="wi-title">Employee Benefits Dashboard Design</div>
           <p class="wi-desc">HR benefits management was drowning in spreadsheets and workarounds. We designed a smart, unified landing page for Medical Mutual's business clients — a single destination that replaced fragmented tools and gave administrators real clarity over the benefits they offer their teams.</p>
@@ -621,13 +629,14 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900&q=80" alt="Benefits Dashboard" loading="lazy">
+        <img class="wi-img" src="images/work-benefits-dashboard.jpg" alt="Benefits Dashboard" loading="lazy">
       </div>
     </div>
 
     <div class="work-item">
       <div class="wi-left">
         <div>
+          <div class="wi-soon">Case study coming soon</div>
           <div class="wi-tags"><span class="tag research">Research</span><span class="tag design">Design</span></div>
           <div class="wi-title">Maritime Prediction &amp; Budgeting Dashboard</div>
           <p class="wi-desc">The maritime industry runs on precision — yet critical forecasting and budget data lived in siloed, opaque systems. We designed a unified prediction and budgeting dashboard for ISF Group that brings operational intelligence to the surface, giving decision-makers the clarity to act with confidence.</p>
@@ -638,13 +647,14 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=900&q=80" alt="Maritime Dashboard" loading="lazy">
+        <div class="wi-text-panel"><span>ISF Group</span><small>Visuals under NDA</small></div>
       </div>
     </div>
 
     <div class="work-item">
       <div class="wi-left">
         <div>
+          <div class="wi-soon">Case study coming soon</div>
           <div class="wi-tags"><span class="tag research">Research</span></div>
           <div class="wi-title">Conversational AI Experience Research</div>
           <p class="wi-desc">When a chatbot, an IVR system, and a search tool each speak a different language, members get lost. We conducted deep research across USAA's conversational AI touchpoints to surface the friction, misalignments, and missed moments of care — laying the foundation for an experience that finally feels like a conversation, not a transaction.</p>
@@ -655,13 +665,14 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&q=80" alt="Conversational AI" loading="lazy">
+        <img class="wi-img" src="images/work-usaa-conversational-ai.jpg" alt="Conversational AI" loading="lazy">
       </div>
     </div>
 
     <div class="work-item">
       <div class="wi-left">
         <div>
+          <div class="wi-soon">Case study coming soon</div>
           <div class="wi-tags"><span class="tag research">Research</span></div>
           <div class="wi-title">Enhancing Platform Differentiation &amp; Adoption</div>
           <p class="wi-desc">TriNetX had value — users just couldn't see it. Through a mix of discovery interviews and behavioural analysis, we identified which features were driving genuine engagement and which barriers were quietly pushing users away. The findings reframed the platform's product strategy around what actually moved the needle on adoption.</p>
@@ -672,13 +683,14 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80" alt="Platform Research" loading="lazy">
+        <img class="wi-img" src="images/work-trinetx.jpg" alt="Platform Research" loading="lazy">
       </div>
     </div>
 
     <div class="work-item">
       <div class="wi-left">
         <div>
+          <div class="wi-soon">Case study coming soon</div>
           <div class="wi-tags"><span class="tag research">Research</span></div>
           <div class="wi-title">Credit Choices &amp; Rewards Research</div>
           <p class="wi-desc">A new rewards program is only as strong as the trust behind it. We explored how CFNA customers truly perceive their credit card options — the mental models, hesitations, and motivators that shape their choices — and translated those insights into a launch strategy for the new rewards program grounded in real customer confidence.</p>
@@ -689,7 +701,7 @@
         </div>
       </div>
       <div class="wi-right">
-        <img class="wi-img" src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=900&q=80" alt="Credit Rewards" loading="lazy">
+        <img class="wi-img" src="images/work-cfna.jpg" alt="Credit Rewards" loading="lazy">
       </div>
     </div>
 
@@ -711,31 +723,28 @@
       <p>
         Outside the research lab, I'm drawn to systems thinking, speculative design, and the occasional unnecessarily long walk that somehow always leads to a breakthrough insight.
       </p>
+      <a href="about.html" class="about-more">More about me →</a>
     </div>
     <div class="about-photo-wrap">
-      <div class="about-photo-placeholder">
-        <div class="avatar-icon">🧑‍💻</div>
-        <span>Kshanika Patel</span>
-        <span style="font-size:0.72rem;color:var(--text-muted)">Add your photo here</span>
-      </div>
+      <img class="about-photo" src="images/portrait.jpg" alt="Kshanika Patel">
       <div class="about-photo-accent"></div>
     </div>
   </div>
 
   <div class="carousel-wrap">
     <div class="carousel-track">
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=480&q=70" alt="Workshop" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=480&q=70" alt="Research Session" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=480&q=70" alt="Whiteboard" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=480&q=70" alt="Team" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=480&q=70" alt="Design Sprint" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1590402494587-44b71d7772f6?w=480&q=70" alt="Affinity Map" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=480&q=70" alt="Workshop" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=480&q=70" alt="Research Session" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=480&q=70" alt="Whiteboard" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=480&q=70" alt="Team" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=480&q=70" alt="Design Sprint" loading="lazy"></div>
-      <div class="carousel-item"><img src="https://images.unsplash.com/photo-1590402494587-44b71d7772f6?w=480&q=70" alt="Affinity Map" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/research.jpg" alt="Synthesis session" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-workshop.jpg" alt="Workshop activities" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/portrait.jpg" alt="In flight" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-affinity-wall.jpg" alt="Affinity mapping wall" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/paintings.jpg" alt="Paintings" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-mural.jpg" alt="Off the clock" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/research.jpg" alt="Synthesis session" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-workshop.jpg" alt="Workshop activities" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/portrait.jpg" alt="In flight" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-affinity-wall.jpg" alt="Affinity mapping wall" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/paintings.jpg" alt="Paintings" loading="lazy"></div>
+      <div class="carousel-item"><img src="images/carousel-mural.jpg" alt="Off the clock" loading="lazy"></div>
     </div>
   </div>
 
@@ -760,9 +769,8 @@
       together.
     </h2>
     <div class="contact-links">
-      <a href="mailto:kshanika.patel@email.com" class="contact-link primary">✉ kshanika.patel@email.com</a>
-      <a href="https://linkedin.com/in/kshanika-patel" target="_blank" rel="noopener" class="contact-link">↗ LinkedIn</a>
-      <a href="#" class="contact-link">↓ Resume</a>
+      <a href="mailto:kshanika95@gmail.com" class="contact-link primary">✉ kshanika95@gmail.com</a>
+      <a href="https://www.linkedin.com/in/kshanika-patel/" target="_blank" rel="noopener" class="contact-link">↗ LinkedIn</a>
     </div>
   </div>
   <div class="footer-bar">
@@ -829,7 +837,7 @@ function animateRing() {
 animateRing();
 
 // cursor state on work items
-document.querySelectorAll('.work-item').forEach(item => {
+document.querySelectorAll('.work-item.has-case').forEach(item => {
   item.addEventListener('mouseenter', () => {
     cursorDot.classList.add('view-mode');
     cursorRing.style.opacity = '0';
@@ -839,19 +847,6 @@ document.querySelectorAll('.work-item').forEach(item => {
     cursorRing.style.opacity = '0.5';
   });
 });
-
-// ── WORK ACCORDION ──
-document.querySelectorAll('.work-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.work-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-  // open first by default after short delay
-});
-setTimeout(() => {
-  document.querySelector('.work-item')?.classList.add('open');
-}, 300);
 
 // ── PARTICLE CANVAS ──
 function initParticles() {
@@ -910,20 +905,6 @@ function initParticles() {
   });
 }
 initParticles();
-
-// ── FLOATING PILLS ──
-const pills = ['Generative Research','Usability Testing','Journey Mapping','Co-Design','Card Sorting','Think-Aloud','Diary Studies','Prototyping','Heuristics','Affinity Mapping'];
-const ft = document.getElementById('floatTags');
-pills.forEach((text, i) => {
-  const el = document.createElement('div');
-  el.className = 'ftag';
-  el.textContent = text;
-  el.style.left = (8 + Math.random() * 80) + '%';
-  el.style.bottom = (Math.random() * 60) + '%';
-  el.style.animationDuration = (14 + Math.random() * 12) + 's';
-  el.style.animationDelay    = (i * 2.1) + 's';
-  ft.appendChild(el);
-});
 
 // ── ENTRANCE OBSERVER ──
 const observer = new IntersectionObserver(entries => {
